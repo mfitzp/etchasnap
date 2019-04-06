@@ -3,16 +3,12 @@ import math
 import numpy as np
 
 import networkx as nx
-from networkx.classes.function import all_neighbors
 from networkx.algorithms.shortest_paths.generic import shortest_path, shortest_path_length
 
 
 SHORT_LINK_LEN = 5
 SHORT_LINK_THRESHOLD = 25
 
-
-
-def sign(x): return 1 if x >= 0 else -1
 
 
 def euclidean_distance_45deg(a, b):
@@ -133,15 +129,15 @@ def calculate_moves(G):
         
     n = 0
     start = (0, 0)
+    last_node = start
     
     def distance(n):
-        # Note that start is modified by the loop.
+        # Note: start is modified by the loop.
         return math.sqrt( 
             (n[0]-start[0])**2 + 
             (n[1]-start[1])**2 
         )
 
-    
     while rgiant:
     
         n += 1    
@@ -168,7 +164,7 @@ def calculate_moves(G):
         # Update to our new position
         start = dnode    
         
-    # Plot and yield final path to home (0,0).
+    # Plot and yield final path to home (0,0).
     path = shortest_path(G, last_node, (0, 0), weight='weight')
     for node in path[1:]:
         # Yield this step to draw it (x & y can be > 1), may require multiple steps.

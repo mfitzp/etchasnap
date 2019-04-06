@@ -3,8 +3,6 @@ import cv2
 import numpy as np
 from io import BytesIO
 
-import time
-
 from picamera import PiCamera
 
 # Global camera instance.
@@ -33,14 +31,8 @@ def take_photo():
 
     stream.seek(0)
     image = Image.open(stream).transpose(Image.ROTATE_180)
-    save_picture(image, 'i')    
     return image
-    
-    
-def save_picture(image, prefix):
-    # Save a copy of the picture for debugging.
-    image.save("%s-photo%s.jpg" % (prefix, int(time.time())))
-    
+
 
 def crop_and_resize(image):
     # Etch-a-Sketch screen is 5:3 ratio (e.g. (25) 125x75, (24) 120x72, (23) 115x69, (20) 100x60)
@@ -49,7 +41,7 @@ def crop_and_resize(image):
 
     wr, hr = t_width / c_width, t_height / c_height
 
-    # Scale the smallest dimension
+    # Scale the smallest dimension
     ratio = wr if wr > hr else hr
     target = int(c_width * ratio), int(c_height * ratio)
     
@@ -125,8 +117,7 @@ def process_image(image, shader=False):
     """
     # Handle the resizing ourselves.
     image = crop_and_resize(image)
-    save_picture(image, 'c')
-    
+
     gray = gray_enhance(image)
     edges = find_edges(gray)   
     
@@ -136,9 +127,7 @@ def process_image(image, shader=False):
         edges = compose_images(edges, pattern)
 
     composed_image = draw_border_box(edges)
-        
-    save_picture(composed_image, 'o')
-    
+
     return composed_image
 
 

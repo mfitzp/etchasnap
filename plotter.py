@@ -13,11 +13,11 @@ MOVE_MAP = {
     'down': down, 
     # Stop actions.
     'stop': stop,       # Stop held.
-    'stop_lr': stop_lr, # Stop lr loose.
-    'stop_ud': stop_ud, # Stop ud loose.
+    'stop_lr': stop_lr, # Stop lr loose.
+    'stop_ud': stop_ud, # Stop ud loose.
 }
 
-# Screen resolution @ scale 50 = 125w 75h
+# Screen resolution @ scale 50 = 125w 75h
 
 
 MIN_STEP_WAIT = 0.001
@@ -135,8 +135,6 @@ def enqueue(moves):
     while movequeue.qsize():
         time.sleep(1)
 
-
-    
 
 thread = threading.Thread(target=plot, daemon=True)
 thread.start()

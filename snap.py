@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 import time
 
 from gpiozero import Button, LED, PWMLED
 
-import graph, plotter, camera
+import camera
 
 
 red = LED(21)
@@ -18,17 +20,17 @@ def status_ready():
     yellow.off()
     red.off()
 
+
 def status_processing():
     green.off()
     red.off()
     yellow.on()
-    
 
 
 def main():
     while True:
                 
-        # Setup the camera interface.
+        # Setup the camera interface.
         camera.prepare()
         status_ready()
         
@@ -36,7 +38,8 @@ def main():
         shutter.wait_for_press()
         status_processing()
         image = camera.take_photo()
+        image.save("photo-%s.jpg" % (int(time.time())))
 
-    
+
 if __name__ == "__main__":
     main()

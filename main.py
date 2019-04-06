@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time
 
 from gpiozero import Button, LED, PWMLED
@@ -46,7 +48,7 @@ def main():
         tilt.wait_for_press()
         time.sleep(1)
 
-        # Setup the camera interface.
+        # Setup the camera interface.
         camera.prepare()
         status_ready()
         
@@ -54,12 +56,14 @@ def main():
         shutter.wait_for_press()
         status_processing()
         image = camera.take_photo()
+        #image.save("raw-photo-%s.jpg" % (int(time.time())))
         image = camera.process_image(image)
-    
+        #image.save("processed-photo-%s.jpg" % (int(time.time())))
+
         # Process the image & generate plotter moves.
         moves = graph.generate_moves(image)
         
-        # Draw the paths.
+        # Draw the paths.
         status_drawing()
         plotter.enqueue(moves)
         
