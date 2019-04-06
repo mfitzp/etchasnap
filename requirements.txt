@@ -1,0 +1,6 @@
+opencv-python==4.0.0.21
+Pillow==6.0.0
+numpy==1.16.2
+gpiozero==1.4.0
+
+
