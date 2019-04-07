@@ -6,13 +6,13 @@ Photos are processed down to 100x60 pixel 1-bit (black & white) line drawings us
 
 The *developing time* for a photo is approximately 15 minutes - 1 hour depending on complexity[^1]. 
 
-![Etch-A-Snap front & back view]({static}/images/projects/etchasnap/etch-a-snap-front-and-back.jpg){: .center .small }
+![Etch-A-Snap front & back view]({static}/images/projects/etchasnap/resources/etch-a-snap-front-and-back.jpg)
 
 The first video below shows the process of taking a photo with the *Etch-A-Snap*, including the initial drawing of the image on the screen. The second clip is a timelapse showing the drawing of the resulting picture.
 
-<video controls class="" style="max-width: 100%; min-height: 546px;"><source type="video/mp4" src="//imgur.com/Kqx2QLv.mp4"></video>
+![How to use the Etch-A-Snap](https://imgur.com/Kqx2QLv.gif)
 
-<video controls class="" style="max-width: 100%; min-height: 546px;"><source type="video/mp4" src="//imgur.com/o1HbUvc.mp4"></video>
+![Timelapse drawing the sample photo](https://imgur.com/o1HbUvc.mp4)
 
 Keep scrolling for some more examples.
 
