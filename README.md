@@ -32,7 +32,7 @@ The Etch-A-Snap can also draw a picture from any image type supported by `Pillow
 
 **[The Queen](https://imgur.com/wmu5kTd.gif)**. There is no route-optimisation (travelling salesman) at work when drawing, aside from adding weight to previously draw areas to encourage avoiding them in future. This picture of the Queen shows some serious back-tracking over the hair/top right corner.
 
-**![Django Wagner](https://imgur.com/cynx4KX.gif)**. Het is weer weekend. This picture produces a poorly connected network around the face, which Etch-A-Snap deals with by adding a number of linker lines (shown in red). These links are optional additions, which can be used to shortcut while drawing but omitted if not needed — the right ear shows an example of an unused linker. 
+**[Django Wagner](https://imgur.com/cynx4KX.gif)**. Het is weer weekend. This picture produces a poorly connected network around the face, which Etch-A-Snap deals with by adding a number of linker lines (shown in red). These links are optional additions, which can be used to shortcut while drawing but omitted if not needed — the right ear shows an example of an unused linker. 
 
 
 
