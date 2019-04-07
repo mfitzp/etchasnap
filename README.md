@@ -12,9 +12,8 @@ The *developing time* for a photo is approximately 15-30 minutes depending on co
 
 The first video below shows the process of taking a photo with the *Etch-A-Snap*, including the initial drawing of the image on the screen. The second clip is a timelapse showing the drawing of the resulting picture.
 
-![How to use the Etch-A-Snap](https://imgur.com/Kqx2QLv.gif)
-
-![Timelapse drawing the sample photo](https://imgur.com/o1HbUvc.gif)
+[How to use the Etch-A-Snap](https://imgur.com/Kqx2QLv.gif)
+[Timelapse drawing the sample photo](https://imgur.com/o1HbUvc.gif)
 
 Keep scrolling for some more examples.
 
@@ -22,22 +21,19 @@ Keep scrolling for some more examples.
 
 These shots were taken live using the Etch-A-Snap — a single shot was taken and immediately drawn to the screen. The drawing process was captured using a timelapse camera.
 
-Outdoor street view showing the Etch-A-Snap struggling a bit on building details. 
+**[Outdoor street view](https://imgur.com/eeu8bcH.gif)** showing the Etch-A-Snap struggling a bit on building details. 
 
-![Outdoor street view](https://imgur.com/eeu8bcH.gif)
 
 ## Image examples
 
 The Etch-A-Snap can also draw a picture from any image type supported by `Pillow` using the `draw.py` utility. Using this script the Etch-A-Snap crops, resizes and processes the images the exact same way as from the camera, but you can be a bit more selective with the image and increase the chances of getting something half decent out.
 
-*Etch-A-Sketch logo* generated from a monochrome PNG. 
-![Etch-A-Sketch logo](https://imgur.com/i0tXHtN.gif)
+**[Etch-A-Sketch logo](https://imgur.com/i0tXHtN.gif)** generated from a monochrome PNG. 
 
-**The Queen**. There is no route-optimisation (travelling salesman) at work when drawing, aside from adding weight to previously draw areas to encourage avoiding them in future. This picture of the Queen shows some serious back-tracking over the hair/top right corner.
-![The Queen](https://imgur.com/wmu5kTd.gif)
+**[The Queen](https://imgur.com/wmu5kTd.gif)**. There is no route-optimisation (travelling salesman) at work when drawing, aside from adding weight to previously draw areas to encourage avoiding them in future. This picture of the Queen shows some serious back-tracking over the hair/top right corner.
 
-**Django Wagner**. Het is weer weekend. This picture produces a poorly connected network around the face, which Etch-A-Snap deals with by adding a number of linker lines (shown in red). These links are optional additions, which can be used to shortcut while drawing but omitted if not needed — the right ear shows an example of an unused linker. 
-![Django Wagner](https://imgur.com/cynx4KX.gif)
+**![Django Wagner](https://imgur.com/cynx4KX.gif)**. Het is weer weekend. This picture produces a poorly connected network around the face, which Etch-A-Snap deals with by adding a number of linker lines (shown in red). These links are optional additions, which can be used to shortcut while drawing but omitted if not needed — the right ear shows an example of an unused linker. 
+
 
 
 ## Requirements
