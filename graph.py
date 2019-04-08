@@ -109,12 +109,12 @@ def connect_graph(G):
                 rest.remove(g)
                 giant.append(g)
         
-    # Use detected short links to minimise the path lengths, where the path between
-    # the connect points is over SHORT_LINK_THRESHOLD.
-    for link in sorted(links, key=lambda x: x[0]):
-        d, g, ng, n0 = link
-        if shortest_path_length(G, ng, n0, weight='weight') >= SHORT_LINK_THRESHOLD:
-            G.add_edge(ng, n0, weight=d)
+        # Use detected short links to minimise the path lengths, where the path between
+        # the connect points is over SHORT_LINK_THRESHOLD.
+        for link in sorted(links, key=lambda x: x[0]):
+            d, g, ng, n0 = link
+            if shortest_path_length(G, ng, n0, weight='weight') >= SHORT_LINK_THRESHOLD:
+                G.add_edge(ng, n0, weight=d)
         
     return G
 

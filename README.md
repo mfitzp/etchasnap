@@ -4,7 +4,7 @@
 
 Photos are processed down to 100x60 pixel 1-bit (black & white) line drawings using `Pillow` and `OpenCV` and then translated into plotter commands by building a network graph representation with `networkx`. The *Etch-A-Sketch* wheels are driven by two 5V stepper motors mounted into a custom 3D printed frame. The *Etch-A-Snap* is entirely portable and powered by 4xAA batteries & 3x18650 LiPo cells.
 
-The *developing time* for a photo is approximately 15 minutes - 1 hour depending on complexity[^1]. 
+The *developing time* for a photo is approximately 15 minutes - 30 minutes depending on complexity[^1]. 
 
 ![Etch-A-Snap front & back view]({static}/images/projects/etchasnap/etch-a-snap-front-and-back.jpg){: .center .small }
 
