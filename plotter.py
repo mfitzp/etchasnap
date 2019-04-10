@@ -21,7 +21,7 @@ MOVE_MAP = {
 
 
 MIN_STEP_WAIT = 0.001
-PLOTTER_SCALE = 50
+PLOTTER_SCALE = 25
 REVERSE_TRACKING_STEPS = 100 // PLOTTER_SCALE  # Tracking steps = 100
 
 # The queue that holds our list of moves in terms of MOVE_MAP (individual steps).

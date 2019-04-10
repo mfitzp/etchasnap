@@ -8,6 +8,8 @@ from picamera import PiCamera
 # Global camera instance.
 camera = None
 
+# Etch-a-Sketch screen is 5:3 ratio (e.g. (25) 125x75, (24) 120x72, (23) 115x69, (20) 100x60)
+TARGET_DIMENSIONS = (240, 144)
 
 FILL_PATTERNS = [
     np.array([[1]]),
@@ -35,8 +37,7 @@ def take_photo():
 
 
 def crop_and_resize(image):
-    # Etch-a-Sketch screen is 5:3 ratio (e.g. (25) 125x75, (24) 120x72, (23) 115x69, (20) 100x60)
-    t_width, t_height = (100, 60)
+    t_width, t_height = TARGET_DIMENSIONS
     c_width, c_height = image.size
 
     wr, hr = t_width / c_width, t_height / c_height

@@ -1,3 +1,4 @@
+import itertools
 import math
 
 import numpy as np
@@ -71,53 +72,57 @@ def connect_graph(G):
     Performed iteratively, connecting each subsequent graph to the the largest
     """
 
-    def graphs_node_iter(graphl):
-        for g in graphl:
-            for node in g.nodes:
-                yield node
-    
-    graphs = sorted(nx.connected_component_subgraphs(G), key=len, reverse=True)
+    graphs = list(nx.connected_component_subgraphs(G))
+
     if len(graphs) > 1:
-    
-        giant, rest = graphs[:1], graphs[1:]
+        combinations = itertools.combinations(graphs, 2)
+        shortest = {}
         links = []
-    
-        while rest:
-            shortest = None
-            
-            for g in rest:
 
-                # For each node in the graph, compare vs. all nodes in the giant-list. The
-                # difference x,y must be 1:1 (diagonal), then find the shortest + link.
-                for ng in graphs_node_iter(giant):
-                    for n0 in g.nodes:
-                        d = euclidean_distance_45deg(ng, n0)
-                        if d:
-                            link = d, g, ng, n0
-                            
-                            if (shortest is None or d < shortest[0]):
-                                shortest = link
-                            
-                            if d < SHORT_LINK_LEN:
-                                # Sub-graph link which is short, can be used to shortcut.
-                                links.append(link)
+        for g0, g1 in combinations:
 
-            if shortest:
-                d, g, ng, n0 = shortest
-                G.add_edge(ng, n0, weight=d)
-                # Move the linked graph to be part of the 'giant'.
-                rest.remove(g)
-                giant.append(g)
-        
-        # Use detected short links to minimise the path lengths, where the path between
-        # the connect points is over SHORT_LINK_THRESHOLD.
+            # For each node in the graph, compare vs. all nodes in the giant-list. The
+            # difference x,y must be 1:1 (diagonal), then find the shortest + link.
+            g_ix = (g0, g1)
+            for n1 in g1.nodes:
+                for n0 in g0.nodes:
+                    d = euclidean_distance_45deg(n1, n0)
+                    if d:
+                        link = d, n0, n1
+
+                        # Find global short links
+                        if (shortest.get(g_ix) is None or d < shortest.get(g_ix)[0]):
+                            shortest[g_ix] = link
+
+                        if d < SHORT_LINK_LEN:
+                            # Sub-graph link which is short, can be used to shortcut.
+                            links.append(link)
+
+        # We have a list of shortest graph-graph connections. We want to find the shortest connections
+        # neccessary to connect *all* graphs. If we connect A-B and B-C then A-B-C are all connected.
+        # Start from the shortest links and work backwards.
+        shortlinks = sorted(shortest.items(), key=lambda x: x[1][0])  # Sort by link data x[1], first part [0] = d
+        connected = [graphs[0]]  # Our current connected graphs
+
+        while len(connected) < len(graphs):
+            for (g0, g1), link in shortlinks:
+                if (g0 in connected and g1 not in connected):
+                    d, n0, n1 = link
+                    G.add_edge(n0, n1, weight=d)
+                    connected.append(g1)
+
+                if (g1 in connected and g0 not in connected):
+                    d, n0, n1 = link
+                    G.add_edge(n0, n1, weight=d)
+                    connected.append(g0)
+
+        # Use detected short links to minimise the path lengths
         for link in sorted(links, key=lambda x: x[0]):
-            d, g, ng, n0 = link
-            if shortest_path_length(G, ng, n0, weight='weight') >= SHORT_LINK_THRESHOLD:
-                G.add_edge(ng, n0, weight=d)
-        
-    return G
+            d, n0, n1 = link
+            if shortest_path_length(G, n0, n1, weight='weight') >= SHORT_LINK_THRESHOLD:
+                G.add_edge(n0, n1, weight=d)
 
+    return G
 
 def calculate_moves(G):
     """
