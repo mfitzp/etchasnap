@@ -74,10 +74,10 @@ def stop():
 
 def stop_lr():
     for p in [lr1, lr2, lr3, lr4]:
-        p.off()
+        p.on()  # Ref is +ve, on == off
 
 
 def stop_ud():
     for p in [ud1, ud2, ud3, ud4]:
-        p.off()
+        p.on()  # Ref is +ve, on == off
 

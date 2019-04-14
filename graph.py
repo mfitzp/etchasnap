@@ -100,21 +100,25 @@ def connect_graph(G):
 
         # We have a list of shortest graph-graph connections. We want to find the shortest connections
         # neccessary to connect *all* graphs. If we connect A-B and B-C then A-B-C are all connected.
-        # Start from the shortest links and work backwards.
+        # Start from the largest graph and the shortest links and work backwards.
         shortlinks = sorted(shortest.items(), key=lambda x: x[1][0])  # Sort by link data x[1], first part [0] = d
-        connected = [graphs[0]]  # Our current connected graphs
+        connected = [max(graphs, key=len)]  # Our current connected graphs
 
         while len(connected) < len(graphs):
+            shortest = None
+            # Find the shortest link for any graph in connected to any graph that isn't.
             for (g0, g1), link in shortlinks:
-                if (g0 in connected and g1 not in connected):
-                    d, n0, n1 = link
-                    G.add_edge(n0, n1, weight=d)
-                    connected.append(g1)
+                d, n0, n1 = link
+                if (g0 in connected and g1 not in connected) and (shortest is None or d < shortest[1][0]):
+                    shortest = g1, link
 
-                if (g1 in connected and g0 not in connected):
-                    d, n0, n1 = link
-                    G.add_edge(n0, n1, weight=d)
-                    connected.append(g0)
+                if (g1 in connected and g0 not in connected) and (shortest is None or d < shortest[1][0]):
+                    shortest = g0, link
+
+            if shortest:
+                g, (d, n0, n1) = shortest
+                G.add_edge(n0, n1, weight=d)
+                connected.append(g)
 
         # Use detected short links to minimise the path lengths
         for link in sorted(links, key=lambda x: x[0]):

@@ -107,24 +107,18 @@ def compose_images(*args):
     return draw_border_box(output)
 
 
-def gray_enhance(image):
-    gray = image.convert('L')
-    return ImageOps.autocontrast(gray)
-
-
 def process_image(image, shader=False):
     """
     Process input image to a simple as possible line-drawing.
     """
     # Handle the resizing ourselves.
     image = crop_and_resize(image)
-
-    gray = gray_enhance(image)
-    edges = find_edges(gray)   
+    contrasted = ImageOps.autocontrast(image)
+    edges = find_edges(contrasted)
     
     # Optionally overlay the shader fill. 
     if shader:
-        pattern = pattern_fill(gray)
+        pattern = pattern_fill(contrasted.convert('L'))
         edges = compose_images(edges, pattern)
 
     composed_image = draw_border_box(edges)

@@ -12,17 +12,16 @@ MOVE_MAP = {
     'up': up, 
     'down': down, 
     # Stop actions.
-    'stop': stop,       # Stop held.
+    'stop': stop, # held
     'stop_lr': stop_lr, # Stop lr loose.
     'stop_ud': stop_ud, # Stop ud loose.
 }
 
-# Screen resolution @ scale 50 = 125w 75h
-
+# Screen resolution @ scale 25 240x144
 
 MIN_STEP_WAIT = 0.001
 PLOTTER_SCALE = 25
-REVERSE_TRACKING_STEPS = 100 // PLOTTER_SCALE  # Tracking steps = 100
+REVERSE_TRACKING_STEPS = 8
 
 # The queue that holds our list of moves in terms of MOVE_MAP (individual steps).
 movequeue = queue.Queue()
@@ -62,6 +61,7 @@ def plot():
             while time.time() < now + MIN_STEP_WAIT:
                 time.sleep(0.001)
 
+            # This underestimates as it doesn't account for the time taken to actually apply the move.
             seconds_remaining = movequeue.qsize() * MIN_STEP_WAIT * PLOTTER_SCALE
             print("{:>8} {:>7},{:>7},{:>7} {:>2}: eta {}    ".format(
                 move_n,
@@ -128,7 +128,7 @@ def enqueue(moves):
         prev_lr, prev_ud = lr, ud
     
 
-    # Send stop all directions (unheld).
+    # Send stop all directions
     movequeue.put(('home', 'stop_lr', 'stop_ud'))
     
     # Wait for the queue to empty.
